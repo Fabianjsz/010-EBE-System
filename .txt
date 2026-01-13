@@ -1,0 +1,9 @@
+
+EBE Tabelle:
+
+ebe_nr ; kunden_nr ; 
+
+
+Kunden Tabelle:
+
+kunden_nr ; name ; vorname ; geschlecht ; geburtsdatum ; strasse ; hausnummer ; plz ; (Ort) ; ortsteil ; ausweisart ; ausweis_nr ; gesetzlicher_vertreter
