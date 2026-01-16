@@ -39,6 +39,19 @@ ausweisTable = """CREATE TABLE IF NOT EXISTS ausweisart(
     bezeichnung TEXT
     )"""
 
+kontrolleurTable = """CREATE TABLE IF NOT EXISTS kontrolleur(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    vorname TEXT
+    )"""
 
+ebeTable = """CREATE TABLE IF NOT EXISTS ebe(
+    nr INTEGER PRIMARY KEY AUTOINCREMENT,
+    kunden_nr INTEGER,
+    kontrolleur_id INTEGER,
+    datum DATE,
+    bemerkung TEXT,
+    feststellungsort TEXT
+    )"""
 
-createTable()
+createTable(ebeTable)
