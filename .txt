@@ -18,3 +18,19 @@ ges_vertreter:
 
 vertreter_id (primary) ; name ; vorname
 
+
+
+EBE reciept:
+datum
+name
+vorname
+adresse
+hausnummer
+plz
+ort
+ausweisart
+ausweisnr
+kontrolleur_id
+feststellungsort
+Bemerkung
+

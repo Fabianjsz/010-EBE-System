@@ -17,6 +17,34 @@ def createTable(table):
     con.commit()
     con.close()
 
+def insertData(query, data):
+    con = sqlite3.connect(dbName)
+    cursor = con.cursor()
+    cursor.execute(query, data)
+    con.commit()
+    con.close()
+
+def createAusweisartTable():
+    createTable(ausweisTable)
+    con = sqlite3.connect(dbName)
+    cur = con.cursor()
+    cur.execute("insert into ausweisart (bezeichnung) VALUES (?), (?), (?)", ("Personalausweis", "Schülerausweis", "Reisepass"))
+    con.commit()
+    con.close()
+
+def dropTable(table):
+    con = sqlite3.connect(dbName)
+    cursor = con.cursor()
+    cursor.execute(f"DROP TABLE IF EXISTS {table}")
+    con.commit()
+    con.close()
+
+def createEBE(datum, name, vorname, adresse, hausnummer, plz, ort, ausweisart, ausweisnr, kontrolleur_id, feststellungsort, bemerkung):
+    con = sqlite3.connect(dbName)
+    cur = con.cursor()
+    cur.execute("insert into ebe (datum, name, vorname, adresse, hausnummer, plz, ort, ausweisart, ausweis_nr, kontrolleur_id, feststellungsort, Bemerkung) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (f"{datum}", f"{name}", f"{vorname}", f"{adresse}", f"{hausnummer}", f"{plz}", f"{ort}", f"{ausweisart}", f"{ausweisnr}", f"{kontrolleur_id}", f"{feststellungsort}", f"{bemerkung}"))
+    con.commit()
+    con.close()
 
 kundenTable = """CREATE TABLE IF NOT EXISTS kunden(
     nr INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,11 +75,22 @@ kontrolleurTable = """CREATE TABLE IF NOT EXISTS kontrolleur(
 
 ebeTable = """CREATE TABLE IF NOT EXISTS ebe(
     nr INTEGER PRIMARY KEY AUTOINCREMENT,
-    kunden_nr INTEGER,
-    kontrolleur_id INTEGER,
     datum DATE,
-    bemerkung TEXT,
-    feststellungsort TEXT
+    name TEXT,
+    vorname TEXT,
+    adresse TEXT,
+    hausnummer INT,
+    plz INT,
+    ort TEXT,
+    ausweisart TEXT,
+    ausweis_nr INT,
+    kontrolleur_id INTEGER,
+    feststellungsort TEXT,
+        bemerkung TEXT
     )"""
 
-createTable(ebeTable)
+
+
+#dropTable("ebe")
+#createTable(ebeTable)
+
