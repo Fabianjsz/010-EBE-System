@@ -208,3 +208,4 @@ __marimo__/
 
 .env
 Hintergrundsystem.db
+frontend_database.db
