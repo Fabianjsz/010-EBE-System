@@ -5,6 +5,7 @@ global frontdb, front_database
 
 front_database = 'frontend_database.db'
 frontdb = False
+user = None
 
 class EBE():
     def __init__(self, datum, name, vorname, adresse, hausnummer, ort):
@@ -48,4 +49,42 @@ def create_ebe():
     ort = input("Ort: ")
     insert_ebe(datum, vorname, name, adresse, hausnummer, ort)
 
-create_ebe()
+def view_ebes():
+    global frontdb
+    if frontdb == False:
+        init_database()
+    con = sqlite3.connect(front_database)
+    cur = con.cursor()
+    cur.execute('SELECT * FROM ebe')
+    ebes = cur.fetchall()
+    for ebe in ebes:
+        print(f"EBE Nr: {ebe[0]}, Datum: {ebe[1]}, Vorname: {ebe[2]}, Name: {ebe[3]}, Adresse: {ebe[4]}, Hausnummer: {ebe[5]}, Ort: {ebe[6]}")
+    con.close()
+
+#app loop
+while True:
+    if user == None:
+        print("loggen sie sich ein")
+        username = input("Username: ")
+        password = input("Passwort: ")
+        #dummy login
+        if username == "admin" and password == "admin":
+            user = "admin"
+            print("Eingeloggt als admin")
+        else:
+            print("Falscher Benutzername oder Passwort")
+    elif user == "admin":
+        print("1. EBE erstellen")
+        print("2. EBE anzeigen")
+        print("3. Logout")
+        choice = input("Wählen sie eine Option: ")
+        if choice == "1":
+            create_ebe()
+        elif choice == "2":
+            view_ebes()
+        elif choice == "3":
+            user = None
+            print("Ausgeloggt")
+        else:
+            print("Ungültige Option")
+
