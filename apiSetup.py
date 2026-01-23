@@ -12,5 +12,5 @@ def read_root():
 
 @app.get("/users")
 def get_user():
-    cur.execute
+    pass
 
